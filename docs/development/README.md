@@ -67,7 +67,7 @@ firefly:
 logging:
   level:
     root: INFO
-    com.firefly: DEBUG
+    io.fireflysoftware: DEBUG
 ```
 
 ### 4. Build the Project
@@ -91,7 +91,7 @@ The application will start on `http://localhost:8081`
 core-common-security-vault/
 ├── core-common-security-vault-models/
 │   ├── src/main/java/
-│   │   └── com/firefly/common/security/vault/models/
+│   │   └── io/fireflysoftware/common/security/vault/models/
 │   │       ├── entities/          # JPA/R2DBC entities
 │   │       └── repositories/      # R2DBC repositories
 │   └── src/main/resources/
@@ -99,12 +99,12 @@ core-common-security-vault/
 │
 ├── core-common-security-vault-interfaces/
 │   └── src/main/java/
-│       └── com/firefly/common/security/vault/interfaces/
+│       └── io/fireflysoftware/common/security/vault/interfaces/
 │           └── dtos/              # Request/Response DTOs
 │
 ├── core-common-security-vault-core/
 │   ├── src/main/java/
-│   │   └── com/firefly/common/security/vault/core/
+│   │   └── io/fireflysoftware/common/security/vault/core/
 │   │       ├── ports/             # Port interfaces
 │   │       ├── adapters/          # Adapter implementations
 │   │       ├── services/          # Business logic
@@ -115,7 +115,7 @@ core-common-security-vault/
 │
 ├── core-common-security-vault-web/
 │   ├── src/main/java/
-│   │   └── com/firefly/common/security/vault/web/
+│   │   └── io/fireflysoftware/common/security/vault/web/
 │   │       ├── controllers/       # REST controllers
 │   │       ├── exception/         # Exception handlers
 │   │       └── CommonPlatformSecurityVaultApplication.java   # Main application
@@ -140,7 +140,7 @@ Follow Google Java Style Guide with these modifications:
 - **Classes**: PascalCase (e.g., `CredentialService`)
 - **Methods**: camelCase (e.g., `encryptCredential`)
 - **Constants**: UPPER_SNAKE_CASE (e.g., `MAX_RETRY_ATTEMPTS`)
-- **Packages**: lowercase (e.g., `com.firefly.common.security.vault`)
+- **Packages**: lowercase (e.g., `io.fireflysoftware.common.security.vault`)
 
 ### Code Formatting
 
@@ -248,7 +248,7 @@ docker build -t firefly-security-vault:dev .
 ### IntelliJ IDEA
 
 1. Create a new **Spring Boot** run configuration
-2. Set **Main class**: `com.firefly.common.security.vault.web.CommonPlatformSecurityVaultApplication`
+2. Set **Main class**: `io.fireflysoftware.common.security.vault.web.CommonPlatformSecurityVaultApplication`
 3. Set **VM options**: `-Dspring.profiles.active=dev`
 4. Set **Working directory**: `$MODULE_WORKING_DIR$`
 5. Click **Debug**
@@ -265,7 +265,7 @@ Create `.vscode/launch.json`:
       "type": "java",
       "name": "Debug Firefly Security Vault",
       "request": "launch",
-      "mainClass": "com.firefly.common.security.vault.web.CommonPlatformSecurityVaultApplication",
+      "mainClass": "io.fireflysoftware.common.security.vault.web.CommonPlatformSecurityVaultApplication",
       "projectName": "core-common-security-vault-web",
       "args": "--spring.profiles.active=dev"
     }

@@ -484,8 +484,8 @@ curl -X POST http://localhost:8081/api/v1/credentials/filter \
 
 ```java
 // Using the auto-generated SDK
-import com.firefly.common.security.vault.sdk.api.CredentialDecryptionApi;
-import com.firefly.common.security.vault.sdk.invoker.ApiClient;
+import io.fireflysoftware.common.security.vault.sdk.api.CredentialDecryptionApi;
+import io.fireflysoftware.common.security.vault.sdk.invoker.ApiClient;
 import java.util.UUID;
 
 ApiClient apiClient = new ApiClient();
@@ -941,7 +941,7 @@ server:
 ```yaml
 logging:
   level:
-    com.firefly.common.security.vault: INFO
+    io.fireflysoftware.common.security.vault: INFO
     org.springframework.r2dbc: WARN
   pattern:
     console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
@@ -1717,7 +1717,7 @@ The microservice includes an **auto-generated Java SDK** using OpenAPI Generator
 
 ```xml
 <dependency>
-    <groupId>com.firefly</groupId>
+    <groupId>io.fireflysoftware</groupId>
     <artifactId>core-common-security-vault-sdk</artifactId>
     <version>1.0.0-SNAPSHOT</version>
 </dependency>
@@ -1729,17 +1729,17 @@ The SDK is generated from the OpenAPI specification and includes:
 
 | Package | Description | Classes |
 |---------|-------------|---------|
-| `com.firefly.common.security.vault.sdk.api` | API clients | `CredentialsApi`, `CredentialDecryptionApi`, `CredentialTypesApi`, etc. |
-| `com.firefly.common.security.vault.sdk.model` | DTOs | `CredentialDTO`, `EncryptionKeyDTO`, `PaginationResponse`, etc. |
-| `com.firefly.common.security.vault.sdk.invoker` | Configuration | `ApiClient` (base client with WebClient) |
+| `io.fireflysoftware.common.security.vault.sdk.api` | API clients | `CredentialsApi`, `CredentialDecryptionApi`, `CredentialTypesApi`, etc. |
+| `io.fireflysoftware.common.security.vault.sdk.model` | DTOs | `CredentialDTO`, `EncryptionKeyDTO`, `PaginationResponse`, etc. |
+| `io.fireflysoftware.common.security.vault.sdk.invoker` | Configuration | `ApiClient` (base client with WebClient) |
 
 ### Basic Usage
 
 ```java
-import com.firefly.common.security.vault.sdk.api.CredentialsApi;
-import com.firefly.common.security.vault.sdk.api.CredentialDecryptionApi;
-import com.firefly.common.security.vault.sdk.invoker.ApiClient;
-import com.firefly.common.security.vault.sdk.model.CredentialDTO;
+import io.fireflysoftware.common.security.vault.sdk.api.CredentialsApi;
+import io.fireflysoftware.common.security.vault.sdk.api.CredentialDecryptionApi;
+import io.fireflysoftware.common.security.vault.sdk.invoker.ApiClient;
+import io.fireflysoftware.common.security.vault.sdk.model.CredentialDTO;
 import reactor.core.publisher.Mono;
 
 // 1. Configure the API client
@@ -1795,9 +1795,9 @@ String apiKey = decryptedValue.block();
 ### Filtering and Pagination
 
 ```java
-import com.firefly.common.security.vault.sdk.model.FilterRequestCredentialDTO;
-import com.firefly.common.security.vault.sdk.model.PaginationRequest;
-import com.firefly.common.security.vault.sdk.model.PaginationResponseCredentialDTO;
+import io.fireflysoftware.common.security.vault.sdk.model.FilterRequestCredentialDTO;
+import io.fireflysoftware.common.security.vault.sdk.model.PaginationRequest;
+import io.fireflysoftware.common.security.vault.sdk.model.PaginationResponseCredentialDTO;
 
 // Create filter request
 FilterRequestCredentialDTO filterRequest = new FilterRequestCredentialDTO();
@@ -2518,7 +2518,7 @@ The microservice uses structured logging with SLF4J and Logback:
 logging:
   level:
     root: INFO
-    com.firefly.common.security.vault: DEBUG
+    io.fireflysoftware.common.security.vault: DEBUG
     org.springframework.r2dbc: WARN
   pattern:
     console: "%d{yyyy-MM-dd HH:mm:ss} %-5level [%thread] %logger{36} - %msg%n"

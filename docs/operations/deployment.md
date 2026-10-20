@@ -171,7 +171,7 @@ stringData:
   "containerDefinitions": [
     {
       "name": "firefly-security-vault",
-      "image": "123456789012.dkr.ecr.us-east-1.amazonaws.com/firefly-security-vault:1.0.0",
+      "image": "123456789012.dkr.ecr.us-east-1.amazonaws.io/fireflysoftware-security-vault:1.0.0",
       "portMappings": [
         {
           "containerPort": 8081,
@@ -322,7 +322,7 @@ management:
 logging:
   level:
     root: INFO
-    com.firefly: DEBUG
+    io.fireflysoftware: DEBUG
   pattern:
     console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
 ```

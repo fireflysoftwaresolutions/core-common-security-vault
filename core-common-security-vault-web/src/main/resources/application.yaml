@@ -50,7 +50,7 @@ springdoc:
     operationsSorter: method
     docExpansion: none
     filter: true
-  packages-to-scan: com.firefly.common.security.vault.web.controllers
+  packages-to-scan: io.fireflysoftware.common.security.vault.web.controllers
   paths-to-match: /api/**
 
 management:
@@ -79,12 +79,12 @@ firefly:
     auto-start-plugins: true
     plugins-directory: disabled
     classpath-scan-packages:
-      - com.firefly.plugins
-      - com.firefly.common.security.vault.core.extensions.plugins
+      - io.fireflysoftware.plugins
+      - io.fireflysoftware.common.security.vault.core.extensions.plugins
     allowed-packages:
-      - com.firefly.common.security.vault.interfaces
-      - com.firefly.core.plugin.api
-      - com.firefly.plugin
+      - io.fireflysoftware.common.security.vault.interfaces
+      - io.fireflysoftware.core.plugin.api
+      - io.fireflysoftware.plugin
     event-bus:
       type: in-memory
       distributed-events: false
@@ -161,7 +161,7 @@ spring:
 logging:
   level:
     root: INFO
-    com.firefly: DEBUG
+    io.fireflysoftware: DEBUG
     org.springframework.r2dbc: DEBUG
     org.flywaydb: DEBUG
 
@@ -174,7 +174,7 @@ spring:
 logging:
   level:
     root: INFO
-    com.firefly: DEBUG
+    io.fireflysoftware: DEBUG
     org.springframework.r2dbc: INFO
 
 springdoc:
@@ -192,7 +192,7 @@ spring:
 logging:
   level:
     root: WARN
-    com.firefly: INFO
+    io.fireflysoftware: INFO
     org.springframework: WARN
 
 springdoc:

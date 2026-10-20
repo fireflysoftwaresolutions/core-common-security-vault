@@ -1,3 +1,18 @@
+<a href="https://fireflysoftware.io/openplatform/">
+<picture>
+  <source media="(max-width: 640px) and (prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/firefly-oss/.github/main/profile/assets/banner-narrow-dark.svg">
+  <source media="(max-width: 640px)" srcset="https://raw.githubusercontent.com/firefly-oss/.github/main/profile/assets/banner-narrow-light.svg">
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/firefly-oss/.github/main/profile/assets/banner-dark.svg">
+  <img src="https://raw.githubusercontent.com/firefly-oss/.github/main/profile/assets/banner-light.svg" alt="Firefly OpenPlatform - Core Common - Security Vault" width="100%">
+</picture>
+</a>
+
+# Firefly OpenPlatform - Core Common - Security Vault
+
+Developed by the Firefly Software Foundation. [dev@fireflysoftware.io](mailto:dev@fireflysoftware.io)
+
+[Website](https://fireflysoftware.io/) · [OpenPlatform](https://fireflysoftware.io/openplatform/) · [Module catalogue](https://fireflysoftware.io/openplatform/modules/)
+
 <!--
 Copyright 2025 Firefly Software Foundation
 
@@ -17,8 +32,6 @@ limitations under the License.
 <div align="center">
 
 <img src="https://via.placeholder.com/150x150/4A90E2/FFFFFF?text=FV" alt="Firefly Vault Logo" width="150" height="150">
-
-# Firefly Security Vault
 
 ### Enterprise-Grade Secrets Management Microservice
 

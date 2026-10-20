@@ -12,6 +12,7 @@
     </parent>
 
     <artifactId>core-common-security-vault</artifactId>
+    <name>core-common-security-vault</name>
     <packaging>pom</packaging>
     <modules>
         <module>core-common-security-vault-core</module>

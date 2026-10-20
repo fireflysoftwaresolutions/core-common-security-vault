@@ -10,6 +10,7 @@
     </parent>
 
     <artifactId>core-common-security-vault-interfaces</artifactId>
+    <name>core-common-security-vault-interfaces</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

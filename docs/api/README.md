@@ -111,7 +111,7 @@ Complete credential object with all fields:
   "encryptionKeyId": "key-uuid",
   "encryptionIv": "base64-iv",
   "credentialOwner": "payment-team",
-  "credentialContactEmail": "payment-team@getfirefly.io",
+  "credentialContactEmail": "payment-team@fireflysoftware.io",
   "expiresAt": "2026-01-01T00:00:00Z",
   "rotateBeforeDays": 7,
   "lastRotatedAt": "2025-10-31T10:00:00Z",

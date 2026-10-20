@@ -34,7 +34,7 @@ limitations under the License.
 [![Tests](https://img.shields.io/badge/tests-94%20passing-success.svg)](core-common-security-vault-core/src/test)
 [![Coverage](https://img.shields.io/badge/coverage-85%25-green.svg)](core-common-security-vault-core/src/test)
 
-[![Website](https://img.shields.io/badge/website-getfirefly.io-blue)](https://getfirefly.io)
+[![Website](https://img.shields.io/badge/website-fireflysoftware.io-blue)](https://fireflysoftware.io)
 [![Documentation](https://img.shields.io/badge/docs-comprehensive-brightgreen)](./docs)
 [![API Docs](https://img.shields.io/badge/API-OpenAPI%203.0-85EA2D)](http://localhost:8081/swagger-ui.html)
 
@@ -1887,7 +1887,7 @@ public class PaymentService {
 ApiClient apiClient = new ApiClient();
 
 // Set base URL
-apiClient.setBasePath("https://vault.production.getfirefly.io");
+apiClient.setBasePath("https://vault.production.fireflysoftware.io");
 
 // Add custom headers (e.g., authentication)
 apiClient.addDefaultHeader("Authorization", "Bearer " + jwtToken);
@@ -2959,14 +2959,14 @@ This project is licensed under the **Apache License 2.0** - see the [LICENSE](LI
 | **Documentation** | [docs/](./docs) | Comprehensive guides and tutorials |
 | **Issues** | [GitHub Issues](https://github.com/firefly-oss/core-common-security-vault/issues) | Bug reports and feature requests |
 | **Discussions** | [GitHub Discussions](https://github.com/firefly-oss/core-common-security-vault/discussions) | Questions and community support |
-| **Email** | dev@getfirefly.io | Direct support |
-| **Website** | [getfirefly.io](https://getfirefly.io) | Firefly platform information |
+| **Email** | dev@fireflysoftware.io | Direct support |
+| **Website** | [fireflysoftware.io](https://fireflysoftware.io) | Firefly platform information |
 
 ### Reporting Security Vulnerabilities
 
 **Do NOT open a public issue for security vulnerabilities!**
 
-Instead, email: **security@getfirefly.io**
+Instead, email: **security@fireflysoftware.io**
 
 We will respond within 48 hours and work with you to address the issue.
 
@@ -2996,7 +2996,7 @@ We will respond within 48 hours and work with you to address the issue.
 - **firefly-card-service** - Card issuance and management
 - **firefly-security-vault** - Credential management (this microservice)
 
-Learn more at [getfirefly.io](https://getfirefly.io)
+Learn more at [fireflysoftware.io](https://fireflysoftware.io)
 
 ---
 

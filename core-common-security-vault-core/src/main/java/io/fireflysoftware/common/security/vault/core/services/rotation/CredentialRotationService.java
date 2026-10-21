@@ -129,27 +129,18 @@ public class CredentialRotationService {
 
         return credentialRepository.findAll()
             .filter(credential -> {
-                // Check if expired and rotation enabled
-                if (credential.getExpiresAt() == null || 
+                if (credential.getExpiresAt() == null ||
                     !Boolean.TRUE.equals(credential.getRotationEnabled())) {
                     return false;
                 }
                 return credential.getExpiresAt().isBefore(LocalDateTime.now());
             })
-            .flatMap(credential -> 
-                // For expired credentials, mark as requiring rotation
-                // In a real implementation, you would generate new credentials here
-                // or trigger an alert for manual rotation
-                auditService.logCredentialRotation(
-                    credential.getId(), 
-                    "system",
-                    "Auto-rotation: credential expired"
-                ).thenReturn(credential)
-            )
+            .doOnNext(credential -> log.warn(
+                    "Credential {} is expired and still needs a new value", credential.getCode()))
             .count()
             .doOnSuccess(count -> {
                 if (count > 0) {
-                    log.warn("Found {} expired credentials requiring rotation", count);
+                    log.warn("Found {} expired credentials that were not rotated", count);
                 }
             });
     }

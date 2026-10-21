@@ -51,19 +51,14 @@ public class CredentialRotationScheduler {
         LocalDateTime now = LocalDateTime.now();
         
         credentialRepository.findCredentialsRequiringRotation(now)
-            .flatMap(credential -> {
-                log.info("Auto-rotating credential: {}", credential.getCode());
-                // Note: In production, generate new value from external source
-                // For now, we just log the rotation requirement
-                log.warn("Credential {} requires rotation (auto-rotation not fully implemented)", 
-                        credential.getCode());
-                metrics.recordRotation("automatic", true);
-                return reactor.core.publisher.Mono.just(credential);
+            .doOnNext(credential -> {
+                log.warn("Credential {} requires a new value; none was issued", credential.getCode());
+                metrics.recordRotation("automatic", false);
             })
             .collectList()
             .subscribe(results -> {
                 long duration = System.currentTimeMillis() - startTime;
-                log.info("Automatic rotation completed. Rotated {} credentials in {}ms", 
+                log.info("Rotation check finished. {} credentials still need a new value ({}ms)",
                         results.size(), duration);
                 metrics.recordRotationDuration("automatic", Duration.ofMillis(duration));
             });

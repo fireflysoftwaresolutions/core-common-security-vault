@@ -18,6 +18,7 @@
 package io.fireflysoftware.common.security.vault.core.services.impl;
 
 import org.fireflyframework.core.filters.FilterRequest;
+import org.fireflyframework.core.filters.FilterUtils;
 import org.fireflyframework.core.queries.PaginationResponse;
 import io.fireflysoftware.common.security.vault.core.mappers.CredentialTypeMapper;
 import io.fireflysoftware.common.security.vault.core.services.CredentialTypeService;
@@ -55,18 +56,9 @@ public class CredentialTypeServiceImpl implements CredentialTypeService {
     @Override
     public Mono<PaginationResponse<CredentialTypeDTO>> filter(FilterRequest<CredentialTypeDTO> filterRequest) {
         log.debug("Filtering credential types with request: {}", filterRequest);
-        
-        // For now, return all active credential types
-        // TODO: Implement proper filtering based on FilterRequest criteria
-        return credentialTypeRepository.findByActive(true)
-            .map(credentialTypeMapper::toDTO)
-            .collectList()
-            .map(list -> PaginationResponse.<CredentialTypeDTO>builder()
-                .content(list)
-                .totalElements((long) list.size())
-                .totalPages(1)
-                .currentPage(0)
-                .build())
+        FilterRequest<CredentialTypeDTO> request = filterRequest == null ? new FilterRequest<>() : filterRequest;
+        return FilterUtils.createFilter(CredentialType.class, credentialTypeMapper::toDTO)
+            .filter(request)
             .doOnSuccess(response -> log.debug("Filtered {} credential types", response.getTotalElements()));
     }
 

@@ -133,6 +133,10 @@ firefly:
         warning-before-days: 7
         rotate-expired: true
         max-versions-to-keep: 10
+
+      issuer:
+        adapter: sandbox
+        endpoint: ${VAULT_ISSUER_URL:}
       
       access-control:
         strict-mode: true

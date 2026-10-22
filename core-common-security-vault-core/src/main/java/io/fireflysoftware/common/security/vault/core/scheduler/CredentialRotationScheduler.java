@@ -51,17 +51,18 @@ public class CredentialRotationScheduler {
         LocalDateTime now = LocalDateTime.now();
         
         credentialRepository.findCredentialsRequiringRotation(now)
-            .doOnNext(credential -> {
-                log.warn("Credential {} requires a new value; none was issued", credential.getCode());
-                metrics.recordRotation("automatic", false);
-            })
+            .concatMap(credential -> rotationService.rotateAutomatic(credential)
+                .doOnNext(result -> metrics.recordRotation("automatic", result.success())))
             .collectList()
             .subscribe(results -> {
                 long duration = System.currentTimeMillis() - startTime;
-                log.info("Rotation check finished. {} credentials still need a new value ({}ms)",
-                        results.size(), duration);
+                long rotated = results.stream()
+                        .filter(CredentialRotationService.RotationResult::success)
+                        .count();
+                log.info("Rotation check finished. {} rotated, {} not rotated ({}ms)",
+                        rotated, results.size() - rotated, duration);
                 metrics.recordRotationDuration("automatic", Duration.ofMillis(duration));
-            });
+            }, error -> log.error("Automatic credential rotation failed: {}", error.getMessage()));
     }
 
     /**

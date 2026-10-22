@@ -49,6 +49,11 @@ public class SecurityVaultProperties {
      */
     private AccessControlConfig accessControl = new AccessControlConfig();
 
+    /**
+     * Secret issuer. Sandbox returns no new secret.
+     */
+    private IssuerConfig issuer = new IssuerConfig();
+
     @Data
     public static class EncryptionConfig {
         /**
@@ -235,5 +240,18 @@ public class SecurityVaultProperties {
          * Rate limit: requests per minute
          */
         private int rateLimitPerMinute = 100;
+    }
+
+    @Data
+    public static class IssuerConfig {
+        /**
+         * sandbox or live. Sandbox is the default and does not issue a new secret.
+         */
+        private String adapter = "sandbox";
+
+        /**
+         * Endpoint read by HttpCredentialIssuer when adapter is live.
+         */
+        private String endpoint = "";
     }
 }

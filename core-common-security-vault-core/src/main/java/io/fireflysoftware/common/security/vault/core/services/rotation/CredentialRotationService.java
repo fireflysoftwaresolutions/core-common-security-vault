@@ -53,6 +53,9 @@ public class CredentialRotationService {
     private final EncryptionService encryptionService;
     private final CredentialAuditService auditService;
     private final SecurityVaultProperties vaultProperties;
+    private final CredentialIssuer issuer;
+
+    private static final UUID AUTOMATIC_ACTOR = UUID.fromString("00000000-0000-4000-8000-000000000001");
 
     /**
      * Manually rotate a credential with a new value
@@ -128,21 +131,44 @@ public class CredentialRotationService {
         }
 
         return credentialRepository.findAll()
-            .filter(credential -> {
-                if (credential.getExpiresAt() == null ||
-                    !Boolean.TRUE.equals(credential.getRotationEnabled())) {
-                    return false;
+            .filter(this::expiredAndEnabled)
+            .concatMap(this::rotateAutomatic)
+            .collectList()
+            .map(results -> {
+                long rotated = results.stream().filter(RotationResult::success).count();
+                long pending = results.size() - rotated;
+                if (pending > 0) {
+                    log.warn("Found {} expired credentials that were not rotated", pending);
                 }
-                return credential.getExpiresAt().isBefore(LocalDateTime.now());
-            })
-            .doOnNext(credential -> log.warn(
-                    "Credential {} is expired and still needs a new value", credential.getCode()))
-            .count()
-            .doOnSuccess(count -> {
-                if (count > 0) {
-                    log.warn("Found {} expired credentials that were not rotated", count);
-                }
+                return rotated;
             });
+    }
+
+    /**
+     * Asks the issuer for a new secret. An empty secret is recorded as not rotated
+     * and does not change {@code lastRotatedAt}.
+     */
+    public Mono<RotationResult> rotateAutomatic(Credential credential) {
+        if (credential == null || credential.getId() == null) {
+            return Mono.error(new IllegalArgumentException("Credential is required"));
+        }
+        return issuer.issue(credential)
+            .filter(secret -> secret != null && !secret.isBlank())
+            .flatMap(secret -> performRotation(credential, secret, AUTOMATIC_ACTOR, "Automatic rotation"))
+            .switchIfEmpty(Mono.defer(() -> recordNotRotated(credential)));
+    }
+
+    private boolean expiredAndEnabled(Credential credential) {
+        if (credential.getExpiresAt() == null || !Boolean.TRUE.equals(credential.getRotationEnabled())) {
+            return false;
+        }
+        return credential.getExpiresAt().isBefore(LocalDateTime.now());
+    }
+
+    private Mono<RotationResult> recordNotRotated(Credential credential) {
+        log.warn("Credential {} was not rotated because the issuer returned no new secret", credential.getCode());
+        return auditService.logCredentialNotRotated(credential.getId(), "Issuer returned no new secret")
+            .thenReturn(new RotationResult(false, credential.getId(), "Credential was not rotated"));
     }
 
     /**

@@ -132,6 +132,15 @@ public class CredentialAuditService {
     }
 
     /**
+     * Record that rotation ran and the issuer returned no new secret.
+     */
+    public Mono<Void> logCredentialNotRotated(UUID credentialId, String reason) {
+        log.info("Credential not rotated: id={}, reason={}", credentialId, reason);
+        return logAccess(credentialId, "system", "credential-rotation", null, "ROTATE",
+                reason, "NOT_ROTATED", null, null, null);
+    }
+
+    /**
      * Log credential deletion
      */
     public Mono<Void> logCredentialDeletion(UUID credentialId, String deletedBy, String deletionReason) {
